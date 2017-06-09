@@ -18,6 +18,7 @@ export declare class Store<S> {
   commit: Commit;
 
   subscribe<P extends Payload>(fn: (mutation: P, state: S) => any): () => void;
+  preview<P extends Payload>(fn: (mutation: P, state: S) => any): () => void;
   watch<T>(getter: (state: S) => T, cb: (value: T, oldValue: T) => void, options?: WatchOptions): void;
 
   registerModule<T>(path: string, module: Module<T, S>): void;

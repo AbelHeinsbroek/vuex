@@ -38,6 +38,11 @@ namespace StoreInstance {
     state.value;
   });
 
+  store.preview((mutation, state) => {
+    mutation.type;
+    state.value;
+  });
+
   store.replaceState({ value: 10 });
 }
 

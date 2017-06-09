@@ -33,6 +33,7 @@ export class Store {
     this._modules = new ModuleCollection(options)
     this._modulesNamespaceMap = Object.create(null)
     this._subscribers = []
+    this._previewers = []
     this._watcherVM = new Vue()
 
     // bind commit and dispatch to self
@@ -87,6 +88,7 @@ export class Store {
       }
       return
     }
+    this._previewers.forEach(pre => pre(mutation, this.state))
     this._withCommit(() => {
       entry.forEach(function commitIterator (handler) {
         handler(payload)
@@ -133,6 +135,19 @@ export class Store {
       const i = subs.indexOf(fn)
       if (i > -1) {
         subs.splice(i, 1)
+      }
+    }
+  }
+
+  preview (fn) {
+    const prevs = this._previewers
+    if (prevs.indexOf(fn) < 0) {
+      prevs.push(fn)
+    }
+    return () => {
+      const i = prevs.indexOf(fn)
+      if (i > -1) {
+        prevs.splice(i, 1)
       }
     }
   }

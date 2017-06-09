@@ -156,6 +156,17 @@ const store = new Vuex.Store({ ...options })
 
   Most commonly used in plugins. [Details](plugins.md)
 
+- **`preview(handler: Function)`**
+
+  Preview store mutations. The `handler` is called *before* every mutation and receives the mutation descriptor and pre-mutation state as arguments:
+
+  ```js
+  store.preview((mutation, state) => {
+    console.log(mutation.type)
+    console.log(mutation.payload)
+  })
+  ```
+
 - **`registerModule(path: string | Array<string>, module: Module)`**
 
   Register a dynamic module. [Details](modules.md#dynamic-module-registration)
