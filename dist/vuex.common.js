@@ -3,6 +3,8 @@
  * (c) 2017 Evan You
  * @license MIT
  */
+'use strict';
+
 function applyMixin (Vue) {
   var version = Number(Vue.version.split('.')[0])
 
@@ -860,7 +862,7 @@ function getModuleByNamespace (store, helper, namespace) {
   return module
 }
 
-var index_esm = {
+var index = {
   Store: Store,
   install: install,
   version: '2.3.1',
@@ -871,4 +873,4 @@ var index_esm = {
   createNamespacedHelpers: createNamespacedHelpers
 }
 
-export { Store, mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers };export default index_esm;
+module.exports = index;
